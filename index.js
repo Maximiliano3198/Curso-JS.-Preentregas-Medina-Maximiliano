@@ -13,30 +13,31 @@ while (nombre == ""){
 
 
 //Ví tarde como hacer el switch :c
-let edad = Number(prompt("edad"))
+let edad = Number(prompt("Edad"))
 if (edad >=11 && edad <= 25){
-let personas = Number(prompt("Escriba una cantidad de personas para calcular el porcentaje estimado de afectados por problemas cardíacos"))
+let personas = Number(prompt("Escriba una cantidad de personas para calcular el estimado de afectados por problemas cardíacos en su mismo rango de edad"))
     let poblacion = Number(personas * 35 / 100)
     let porcentaje = Number(poblacion * 100 / personas)
     console.log (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
-    alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
+    alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas}) son afectados por problemas cardíacos`)
 }else if(edad >=26 && edad <= 50){
-    let personas = Number(prompt("Escriba una cantidad de personas para calcular el porcentaje estimado de afectados por problemas cardíacos"))
+    let personas = Number(prompt("Escriba una cantidad de personas para calcular el estimado de afectados por problemas cardíacos en su mismo rango de edad"))
         let poblacion = Number(personas * 29 / 100)
         let porcentaje = Number(poblacion * 100 / personas)
         console.log (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
-        alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
+        alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas}) son afectados por problemas cardíacos`)
 }else if (edad >=51 && edad <= 99){
-    let personas = Number(prompt("Escriba una cantidad de personas para calcular el porcentaje estimado de afectados por problemas cardíacos"))
+    let personas = Number(prompt("Escriba una cantidad de personas para calcular el estimado de afectados por problemas cardíacos en su mismo rango de edad"))
         let poblacion = Number(personas * 20 / 100)
         let porcentaje = Number(poblacion * 100 / personas)
         console.log (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
-        alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
+        alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas}) son afectados por problemas cardíacos`)
 }else if (edad >= 1 && edad <= 10){
     alert (`No hay datos para ese rango etario`)
 }else {
     alert(`El número ingresado no es valido, vuelva a intentarlo.`)
 }
+
 
 //for para poner algo pq no sabia que ponerle 
 let Total = Number(prompt("Escribe un numero del cual quieres sacar los porcentajes de 5% en 5%"))
@@ -45,4 +46,8 @@ let Total = Number(prompt("Escribe un numero del cual quieres sacar los porcenta
         let resultado = Number(Total * porcentaje / 100)
         console.log(`${Total} * ${porcentaje} / ${100} = ${Total * porcentaje / 100}`)
         alert (`${resultado} es igual al ${porcentaje}% de ${Total}`)
+        if (Total == ""){
+            alert(`Todos los porcentajes de 0 o nada siguen siendo 0 ¬¬`)
+            break
+        }
 }
