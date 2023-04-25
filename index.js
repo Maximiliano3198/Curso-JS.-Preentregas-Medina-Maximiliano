@@ -1,8 +1,8 @@
 //solo pa' usar while (el alert solo para replicar el meme)
-let nombre = prompt("ingrese su nombre")
-console.log (`ingresó: ${nombre}`)
+let nombre = prompt("Ingrese su nombre")
+console.log (`Ingresó: ${nombre}`)
 while (nombre == ""){
-    alert("el usuario ingresó un dato invalido")
+    alert("El usuario ingresó un dato invalido")
     nombre = prompt("Ingrese un nombre")
     if (nombre != ""){
         console.log (`Bienvenido ${nombre}`)
@@ -51,3 +51,36 @@ let Total = Number(prompt("Escribe un numero del cual quieres sacar los porcenta
             break
         }
 }
+
+
+function valoracion (a){
+    switch (a){
+        case '0':
+            return 'Sentimos tu mala experiencia. Estamos trabajando para mejorar tu experiencia.';
+        case '1':
+            return 'Sentimos tu mala experiencia. Estamos trabajando para mejorar tu experiencia.';
+        case '2':
+            return 'Sentimos tu experiencia. Estamos trabajando para mejorar tu experiencia.';
+        case '3':
+            return 'Estamos trabajando para mejorar tu experiencia.';
+        case '4':
+            return '¡Gracias! Estamos trabajando para mejorar tu experiencia.';
+        case '5':
+            return '¡Muchas gracias!';
+        default:
+            return 'Caracter invalido';
+    }
+}
+
+//tuve que meter un if al comienzo porque no me tomaba la funcion si cumplia en el primer intento con la condicion dentro del while
+let val = prompt("Por favor deja tu valoración conforme a tu experiencia. (0 al 5)")
+if (val <= 5){
+    let dev = valoracion (val)
+    alert(dev)}
+while (val >= 6){
+    alert("Por favor ingrese un numero del 0 al 5")
+    val = prompt("Por favor deja tu valoración conforme a tu experiencia. (0 al 5)")
+    if (val <= 5){
+        let dev = valoracion (val)
+        alert(dev)}
+}console.log(val)
