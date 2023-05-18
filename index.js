@@ -73,8 +73,8 @@ function tmedad() {
             tablaCont();
             break;
         } else {
-            alert("No tenemos registro para el dato ingresado.");
-            tmedad();
+            alert("No tenemos registro para esa edad, lo sentimos.");
+            tablaCont();
         }
     }
 }
