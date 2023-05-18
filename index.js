@@ -18,6 +18,8 @@ function presentacion() {
             alert("No ingresaste algún valor");
         } else if (genero.toUpperCase() !== "H" && genero.toUpperCase() !== "M") {
             alert("El valor ingresado para género no es válido. Por favor, ingresa 'H' para Hombre o 'M' para Mujer.");
+        } else if (isNaN(edad)) {
+            alert("El valor ingresado para edad no es válido. Por favor, ingresa un número.");
         } else {
             let generoTexto = (genero.toUpperCase() === "H") ? "Hombre" : "Mujer";
             let persona = new Persona(nombre, edad, generoTexto);
@@ -39,11 +41,11 @@ function tmgeneral() {
 function tmgenero() {
     let genero = personas[personas.length - 1].genero;
     while (true) {
-        if (genero === "H") {
+        if (genero === "Hombre") {
             alert("La tasa de mortalidad masculina es de 4 personas en 100 por las diversas causas en un día");
             tablaCont();
             break;
-        } else if (genero === "F") {
+        } else if (genero === "Mujer") {
             alert("La tasa de mortalidad femenina es de 3 personas en 100 por las diversas causas en un día");
             tablaCont();
             break;
@@ -81,9 +83,9 @@ function tmgye() {
     let genero = personas[personas.length - 1].genero;
     let edad = personas[personas.length - 1].edad;
 
-    if (genero === "1") {
+    if (genero === "Hombre") {
         alert("La tasa de mortalidad masculina es de 4 personas en 100 por las diversas causas en un día");
-    } else if (genero === "2") {
+    } else if (genero === "Mujer") {
         alert("La tasa de mortalidad femenina es de 3 personas en 100 por las diversas causas en un día");
     } else {
         alert("Datos inválidos para el género");
