@@ -137,7 +137,7 @@ function salir() {
 function ejecutarOpcion(traerFuncion, mensaje) {
     alert(mensaje);
     traerFuncion();
-  }
+}
 
 function tablaCont() {
     let selectSection = prompt(`¿Qué quieres hacer, ${personas[personas.length - 1].nombre}? \n 1. Ver la tasa de mortalidad general \n 2. Ver la tasa de mortalidad según el género \n 3. Ver la tasa de mortalidad según la edad \n 4. Ver la tasa de mortalidad según género y edad \n 5. Cargar otra persona \n 6. Ver lista y cambiar la persona seleccionada \n 7. Salir`);
