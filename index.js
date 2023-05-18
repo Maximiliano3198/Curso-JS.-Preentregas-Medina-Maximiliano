@@ -1,86 +1,173 @@
-//solo pa' usar while (el alert solo para replicar el meme)
-let nombre = prompt("Ingrese su nombre")
-console.log (`Ingresó: ${nombre}`)
-while (nombre == ""){
-    alert("El usuario ingresó un dato invalido")
-    nombre = prompt("Ingrese un nombre")
-    if (nombre != ""){
-        console.log (`Bienvenido ${nombre}`)
-        alert(`${nombre} su nombre es Bienvenido`)
+let personas = [];
+
+class Persona {
+    constructor(nombre, edad, genero) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
     }
 }
 
+function presentacion() {
+    while (true) {
+        let nombre = prompt("Ingresa tu nombre");
+        let edad = prompt("Ingresa tu edad");
+        let genero = prompt("Ingresa tu género:\nH. Hombre\nM. Mujer");
 
-
-//Ví tarde como hacer el switch :c
-let edad = Number(prompt("Edad"))
-if (edad >=11 && edad <= 25){
-let personas = Number(prompt("Escriba una cantidad de personas para calcular el estimado de afectados por problemas cardíacos en su mismo rango de edad"))
-    let poblacion = Number(personas * 35 / 100)
-    let porcentaje = Number(poblacion * 100 / personas)
-    console.log (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
-    alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas}) son afectados por problemas cardíacos`)
-}else if(edad >=26 && edad <= 50){
-    let personas = Number(prompt("Escriba una cantidad de personas para calcular el estimado de afectados por problemas cardíacos en su mismo rango de edad"))
-        let poblacion = Number(personas * 29 / 100)
-        let porcentaje = Number(poblacion * 100 / personas)
-        console.log (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
-        alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas}) son afectados por problemas cardíacos`)
-}else if (edad >=51 && edad <= 99){
-    let personas = Number(prompt("Escriba una cantidad de personas para calcular el estimado de afectados por problemas cardíacos en su mismo rango de edad"))
-        let poblacion = Number(personas * 20 / 100)
-        let porcentaje = Number(poblacion * 100 / personas)
-        console.log (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas})`)
-        alert (`${porcentaje}% en el rango etario (${poblacion} personas de ${personas}) son afectados por problemas cardíacos`)
-}else if (edad >= 1 && edad <= 10){
-    alert (`No hay datos para ese rango etario`)
-}else {
-    alert(`El número ingresado no es valido, vuelva a intentarlo.`)
-}
-
-
-//for para poner algo pq no sabia que ponerle 
-let Total = Number(prompt("Escribe un numero del cual quieres sacar los porcentajes de 5% en 5%"))
- for (let j =1; j <= 5; j++){
-        let porcentaje = Number(j * 5)
-        let resultado = Number(Total * porcentaje / 100)
-        console.log(`${Total} * ${porcentaje} / ${100} = ${Total * porcentaje / 100}`)
-        alert (`${resultado} es igual al ${porcentaje}% de ${Total}`)
-        if (Total == ""){
-            alert(`Todos los porcentajes de 0 o nada siguen siendo 0 ¬¬`)
-            break
+        if (nombre === "" || edad === "" || genero === "") {
+            alert("No ingresaste algún valor");
+        } else if (genero.toUpperCase() !== "H" && genero.toUpperCase() !== "M") {
+            alert("El valor ingresado para género no es válido. Por favor, ingresa 'H' para Hombre o 'M' para Mujer.");
+        } else {
+            let generoTexto = (genero.toUpperCase() === "H") ? "Hombre" : "Mujer";
+            let persona = new Persona(nombre, edad, generoTexto);
+            alert(`Ingresaste como: ${nombre}`);
+            personas.push(persona);
+            break;
         }
-}
-
-
-function valoracion (a){
-    switch (a){
-        case '0':
-            return 'Sentimos tu mala experiencia. Estamos trabajando para mejorar tu experiencia.';
-        case '1':
-            return 'Sentimos tu mala experiencia. Estamos trabajando para mejorar tu experiencia.';
-        case '2':
-            return 'Sentimos tu experiencia. Estamos trabajando para mejorar tu experiencia.';
-        case '3':
-            return 'Estamos trabajando para mejorar tu experiencia.';
-        case '4':
-            return '¡Gracias! Estamos trabajando para mejorar tu experiencia.';
-        case '5':
-            return '¡Muchas gracias!';
-        default:
-            return 'Caracter invalido';
     }
 }
 
-//tuve que meter un if al comienzo porque no me tomaba la funcion si cumplia en el primer intento con la condicion dentro del while
-let val = prompt("Por favor deja tu valoración conforme a tu experiencia. (0 al 5)")
-if (val <= 5){
-    let dev = valoracion (val)
-    alert(dev)}
-while (val >= 6){
-    alert("Por favor ingrese un numero del 0 al 5")
-    val = prompt("Por favor deja tu valoración conforme a tu experiencia. (0 al 5)")
-    if (val <= 5){
-        let dev = valoracion (val)
-        alert(dev)}
-}console.log(val)
+presentacion();
+
+function tmgeneral() {
+    alert("la tasa de mortalidad general es de 7 personas en 100 por las diversas causas en un día")
+    tablaCont()
+}
+
+
+function tmgenero() {
+    let genero = personas[personas.length - 1].genero;
+    while (true) {
+        if (genero === "H") {
+            alert("La tasa de mortalidad masculina es de 4 personas en 100 por las diversas causas en un día");
+            tablaCont();
+            break;
+        } else if (genero === "F") {
+            alert("La tasa de mortalidad femenina es de 3 personas en 100 por las diversas causas en un día");
+            tablaCont();
+            break;
+        } else {
+            alert("Datos invalidos ");
+            break;
+        }
+    }
+}
+
+
+function tmedad() {
+    let edad = personas[personas.length - 1].edad;
+    while (true) {
+        if (edad >= 11 && edad <= 25) {
+            alert(`La tasa de mortalidad en el rango etario de 11-25 años (${personas[personas.length - 1].edad}) es de 12 personas en 100 por las diversas causas en un día`);
+            tablaCont();
+            break;
+        } else if (edad >= 26 && edad <= 50) {
+            alert(`La tasa de mortalidad en el rango etario de 26-50 años (${personas[personas.length - 1].edad}) es de 16 personas en 100 por las diversas causas en un día`);
+            tablaCont();
+            break;
+        } else if (edad >= 51 && edad <= 99) {
+            alert(`La tasa de mortalidad en el rango etario de 51-99 años (${personas[personas.length - 1].edad}) es de 20 personas en 100 por las diversas causas en un día`);
+            tablaCont();
+            break;
+        } else {
+            alert("No tenemos registro para el dato ingresado.");
+            tmedad();
+        }
+    }
+}
+
+function tmgye() {
+    let genero = personas[personas.length - 1].genero;
+    let edad = personas[personas.length - 1].edad;
+
+    if (genero === "1") {
+        alert("La tasa de mortalidad masculina es de 4 personas en 100 por las diversas causas en un día");
+    } else if (genero === "2") {
+        alert("La tasa de mortalidad femenina es de 3 personas en 100 por las diversas causas en un día");
+    } else {
+        alert("Datos inválidos para el género");
+        return;
+    }
+
+    if (edad >= 11 && edad <= 25) {
+        alert(`La tasa de mortalidad en el rango etario de 11-25 años (${personas[personas.length - 1].edad}) es de 12 personas en 100 por las diversas causas en un día`);
+    } else if (edad >= 26 && edad <= 50) {
+        alert(`La tasa de mortalidad en el rango etario de 26-50 años (${personas[personas.length - 1].edad}) es de 16 personas en 100 por las diversas causas en un día`);
+    } else if (edad >= 51 && edad <= 99) {
+        alert(`La tasa de mortalidad en el rango etario de 51-99 años (${personas[personas.length - 1].edad}) es de 20 personas en 100 por las diversas causas en un día`);
+    } else {
+        alert("No tenemos registro para la edad ingresada.");
+        return;
+    }
+
+    tablaCont();
+}
+
+
+function cambiarPersonas() {
+    if (personas.length === 0) {
+        alert("No hay personas cargadas");
+    } else {
+        let listaPersonas = "Personas cargadas:\n";
+        for (let i = 0; i < personas.length; i++) {
+            listaPersonas += `${i + 1}. Nombre: ${personas[i].nombre}, Edad: ${personas[i].edad}, Género: ${personas[i].genero}\n`;
+        }
+        listaPersonas += "Seleccione el número de la persona que desea mover al final:\n";
+
+        let seleccion = prompt(listaPersonas);
+        let indice = parseInt(seleccion) - 1;
+
+        if (isNaN(indice) || indice < 0 || indice >= personas.length) {
+            alert("La selección no es válida");
+        } else {
+            let personaSeleccionada = personas.splice(indice, 1)[0];
+            personas.push(personaSeleccionada);
+            alert(`${personaSeleccionada.nombre} ha sido seleccionadx.`);
+        }
+    }
+
+    tablaCont();
+}
+
+function salir() {
+    alert("Hasta la proxima");
+}
+
+function ejecutarOpcion(traerFuncion, mensaje) {
+    alert(mensaje);
+    traerFuncion();
+  }
+
+function tablaCont() {
+    let selectSection = prompt(`¿Qué quieres hacer, ${personas[personas.length - 1].nombre}? \n 1. Ver la tasa de mortalidad general \n 2. Ver la tasa de mortalidad según el género \n 3. Ver la tasa de mortalidad según la edad \n 4. Ver la tasa de mortalidad según género y edad \n 5. Cargar otra persona \n 6. Ver lista y cambiar la persona seleccionada \n 7. Salir`);
+    switch (selectSection) {
+        case "1":
+            ejecutarOpcion(tmgeneral, "Abriendo tasa de mortalidad general, presione aceptar para continuar.");
+            break;
+        case "2":
+            ejecutarOpcion(tmgenero, "Abriendo tasa de mortalidad según género, presione aceptar para continuar.");
+            break;
+        case "3":
+            ejecutarOpcion(tmedad, "Abriendo tasa de mortalidad según la edad, presione aceptar para continuar.");
+            break;
+        case "4":
+            ejecutarOpcion(tmgye, "Abriendo tasa de mortalidad según género y edad, presione aceptar para continuar.");
+            break;
+        case "5":
+            presentacion();
+            tablaCont();
+            break;
+        case "6":
+            cambiarPersonas();
+            break;
+        case "7":
+            salir();
+            break;
+        default:
+            alert("No has introducido un número válido");
+            tablaCont();
+            break;
+    }
+}
+tablaCont();
