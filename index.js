@@ -149,16 +149,23 @@ function realizarFind() {
                 alert(`[${index}] ${personaEncontrada.nombre}`);
             });
 
-            let indexMover = prompt("Ingrese el numero de la persona con la que desea ingresar:");
+            let indexMover = prompt("Ingrese el número de la persona con la que desea ingresar:");
             indexMover = parseInt(indexMover);
 
             if (indexMover >= 0 && indexMover < personasEncontradas.length) {
                 let personaMover = personasEncontradas.splice(indexMover, 1)[0];
-                personas = personas.filter((persona) => persona.nombre !== personaMover.nombre);
-                personas.push(personaMover);
+                let personaEncontrada = personas.find((persona) => persona.nombre === personaMover.nombre);
 
-                console.log(`Se ha ingresado con ${personaMover.nombre}.`);
-                alert(`Se ha ingresado con ${personaMover.nombre}.`);
+                if (personaEncontrada) {
+                    personas = personas.filter((persona) => persona.nombre !== personaMover.nombre);
+                    personas.push(personaMover);
+
+                    console.log(`Se ha ingresado con ${personaMover.nombre}.`);
+                    alert(`Se ha ingresado con ${personaMover.nombre}.`);
+                } else {
+                    console.log("No se encontró la persona en la lista general.");
+                    alert("No se encontró la persona en la lista general.");
+                }
             } else {
                 console.log("Caracter ingresado inválido.");
                 alert("Caracter ingresado inválido.");
