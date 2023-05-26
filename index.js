@@ -115,7 +115,7 @@ function cambiarPersonas() {
         for (let i = 0; i < personas.length; i++) {
             listaPersonas += `${i + 1}. Nombre: ${personas[i].nombre}, Edad: ${personas[i].edad}, Género: ${personas[i].genero}\n`;
         }
-        listaPersonas += "Seleccione el número de la persona que desea mover al final:\n";
+        listaPersonas += "Seleccione el número de la persona con la que desea ingresar:\n";
 
         let seleccion = prompt(listaPersonas);
         let indice = parseInt(seleccion) - 1;
@@ -132,17 +132,59 @@ function cambiarPersonas() {
     tablaCont();
 }
 
+
+function realizarFind() {
+    let confirmFind = prompt("¿Desea realizar una búsqueda? (s/n)");
+
+    if (confirmFind.toLowerCase() === "s") {
+        let letraBuscar = prompt("Ingrese la letra a buscar en el nombre:");
+        let personasEncontradas = personas.filter((persona) => persona.nombre.toLowerCase().includes(letraBuscar.toLowerCase()));
+
+        if (personasEncontradas.length > 0) {
+            console.log("Se han encontrado coincidencias");
+            alert("Se han encontrado coincidencias");
+
+            personasEncontradas.forEach((personaEncontrada, index) => {
+                console.log(`[${index}]`, personaEncontrada);
+                alert(`[${index}] ${personaEncontrada.nombre}`);
+            });
+
+            let indexMover = prompt("Ingrese el numero de la persona con la que desea ingresar:");
+            indexMover = parseInt(indexMover);
+
+            if (indexMover >= 0 && indexMover < personasEncontradas.length) {
+                let personaMover = personasEncontradas.splice(indexMover, 1)[0];
+                personas = personas.filter((persona) => persona.nombre !== personaMover.nombre);
+                personas.push(personaMover);
+
+                console.log(`Se ha ingresado con ${personaMover.nombre}.`);
+                alert(`Se ha ingresado con ${personaMover.nombre}.`);
+            } else {
+                console.log("Caracter ingresado inválido.");
+                alert("Caracter ingresado inválido.");
+            }
+        } else {
+            console.log("No se encontraron personas con esa letra en el nombre.");
+            alert("No se encontraron personas con esa letra en el nombre.");
+        }
+    }
+
+    tablaCont();
+}
+
 function salir() {
     alert("Hasta la proxima");
 }
+
 
 function ejecutarOpcion(traerFuncion, mensaje) {
     alert(mensaje);
     traerFuncion();
 }
 
+
 function tablaCont() {
-    let selectSection = prompt(`¿Qué quieres hacer, ${personas[personas.length - 1].nombre}? \n 1. Ver la tasa de mortalidad general \n 2. Ver la tasa de mortalidad según el género \n 3. Ver la tasa de mortalidad según la edad \n 4. Ver la tasa de mortalidad según género y edad \n 5. Cargar otra persona \n 6. Ver lista y cambiar la persona seleccionada \n 7. Salir`);
+    let selectSection = prompt(`¿Qué quieres hacer, ${personas[personas.length - 1].nombre}? \n 1. Ver la tasa de mortalidad general \n 2. Ver la tasa de mortalidad según el género \n 3. Ver la tasa de mortalidad según la edad \n 4. Ver la tasa de mortalidad según género y edad \n 5. Cargar otra persona \n 6. Ver lista y cambiar la persona seleccionada \n 7. Buscar por nombre o letra y cambiar la persona seleccionada \n 8. Salir`);
     switch (selectSection) {
         case "1":
             ejecutarOpcion(tmgeneral, "Abriendo tasa de mortalidad general, presione aceptar para continuar.");
@@ -163,7 +205,10 @@ function tablaCont() {
         case "6":
             cambiarPersonas();
             break;
-        case "7":
+         case "7":
+            realizarFind();
+            break;
+        case "8":
             salir();
             break;
         default:
