@@ -1,5 +1,7 @@
 let nombre = prompt("Ingrese su nombre")
+if (nombre != ""){
 console.log (`Ingresó: ${nombre}`)
+alert(`Bienvenido ${nombre}`)}
 while (nombre == ""){
     alert("El usuario ingresó un dato invalido")
     nombre = prompt("Ingrese un nombre")
