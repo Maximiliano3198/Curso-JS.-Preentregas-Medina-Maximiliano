@@ -1,12 +1,10 @@
-
 if (document.readyState == 'loading') {
-    document.addEventListener('DOMContentLoaded', ready)
+    document.addEventListener('DOMContentLoaded', ready);
 } else {
     ready();
 }
 
 function ready() {
-
     let botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
     for (let i = 0; i < botonesEliminarItem.length; i++) {
         let button = botonesEliminarItem[i];
@@ -31,23 +29,74 @@ function ready() {
         button.addEventListener('click', agregarAlCarritoClicked);
     }
 
-    document.getElementsByClassName('btn-pagar')[0].addEventListener('click', pagarClicked)
-    document.getElementsByClassName('btnClear')[0].addEventListener('click', limpiarClicked)
+
+    carritoItemsA = cargarCarritoDesdeLocalStorage();
+    let itemsCarrito = document.getElementsByClassName('carrito-items')[0];
+
+
+    for (let i = 0; i < carritoItemsA.length; i++) {
+        let carritoItem = carritoItemsA[i];
+        let item = document.createElement('div');
+        item.classList.add('carrito-item');
+
+        let itemCarritoContenido = `
+            <img src="${carritoItem.imagenSrc}" width="80px" alt="">
+            <div class="carrito-item-detalles">
+                <span class="carrito-item-titulo">${carritoItem.titulo}</span>
+                <div class="selector-cantidad">
+                    <i class="fa-solid fa-minus restar-cantidad"></i>
+                    <input type="text" value="${carritoItem.cantidad}" class="carrito-item-cantidad" disabled>
+                    <i class="fa-solid fa-plus sumar-cantidad"></i>
+                </div>
+                <span class="carrito-item-precio">${carritoItem.precio}</span>
+            </div>
+            <button class="btn-eliminar">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        `;
+
+        item.innerHTML = itemCarritoContenido;
+        itemsCarrito.append(item);
+
+        let eliminarButton = item.getElementsByClassName('btn-eliminar')[0];
+        eliminarButton.addEventListener('click', eliminarItemCarrito);
+
+        let botonRestarCantidad = item.getElementsByClassName('restar-cantidad')[0];
+        botonRestarCantidad.addEventListener('click', restarCantidad);
+
+        let botonSumarCantidad = item.getElementsByClassName('sumar-cantidad')[0];
+        botonSumarCantidad.addEventListener('click', sumarCantidad);
+    }
+
+    document.getElementsByClassName('btn-pagar')[0].addEventListener('click', pagarClicked);
+    document.getElementsByClassName('btnClear')[0].addEventListener('click', limpiarClicked);
+    actualizarTotalCarrito();
 }
+
 
 function pagarClicked() {
     alert("Gracias por la compra");
     let carritoItems = document.getElementsByClassName('carrito-items')[0];
     while (carritoItems.hasChildNodes()) {
-        carritoItems.removeChild(carritoItems.firstChild)
+        carritoItems.removeChild(carritoItems.firstChild);
     }
+
+    carritoItemsA = [];
+
+    guardarCarritoEnLocalStorage(carritoItemsA);
+
     actualizarTotalCarrito();
 }
+
 function limpiarClicked() {
     let carritoItems = document.getElementsByClassName('carrito-items')[0];
     while (carritoItems.hasChildNodes()) {
         carritoItems.removeChild(carritoItems.firstChild)
     }
+
+    carritoItemsA = [];
+
+    guardarCarritoEnLocalStorage(carritoItemsA);
     actualizarTotalCarrito();
 }
 
@@ -63,9 +112,13 @@ function agregarAlCarritoClicked(event) {
 
 }
 
+let carritoItemsA = [];
+
+
 function agregarItemAlCarrito(titulo, precio, imagenSrc) {
     let item = document.createElement('div');
-    item.classList.add = ('item');
+    item.classList.add('carrito-item');
+
     let itemsCarrito = document.getElementsByClassName('carrito-items')[0];
 
     let nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
@@ -77,24 +130,34 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc) {
     }
 
     let itemCarritoContenido = `
-        <div class="carrito-item">
-            <img src="${imagenSrc}" width="80px" alt="">
-            <div class="carrito-item-detalles">
-                <span class="carrito-item-titulo">${titulo}</span>
-                <div class="selector-cantidad">
-                    <i class="fa-solid fa-minus restar-cantidad"></i>
-                    <input type="text" value="1" class="carrito-item-cantidad" disabled>
-                    <i class="fa-solid fa-plus sumar-cantidad"></i>
-                </div>
-                <span class="carrito-item-precio">${precio}</span>
+        <img src="${imagenSrc}" width="80px" alt="">
+        <div class="carrito-item-detalles">
+            <span class="carrito-item-titulo">${titulo}</span>
+            <div class="selector-cantidad">
+                <i class="fa-solid fa-minus restar-cantidad"></i>
+                <input type="text" value="1" class="carrito-item-cantidad" disabled>
+                <i class="fa-solid fa-plus sumar-cantidad"></i>
             </div>
-            <button class="btn-eliminar">
-                <i class="fa-solid fa-trash"></i>
-            </button>
+            <span class="carrito-item-precio">${precio}</span>
         </div>
-    `
+        <button class="btn-eliminar">
+            <i class="fa-solid fa-trash"></i>
+        </button>
+    `;
+
     item.innerHTML = itemCarritoContenido;
     itemsCarrito.append(item);
+
+    let carritoItem = {
+        titulo: titulo,
+        precio: precio,
+        imagenSrc: imagenSrc,
+        cantidad: 1
+    };
+
+    carritoItemsA.push(carritoItem);
+    console.log(carritoItemsA);
+    guardarCarritoEnLocalStorage(carritoItemsA);
 
     item.getElementsByClassName('btn-eliminar')[0].addEventListener('click', eliminarItemCarrito);
 
@@ -106,6 +169,7 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc) {
 
     actualizarTotalCarrito();
 }
+
 
 function sumarCantidad(event) {
     let buttonClicked = event.target;
@@ -153,5 +217,12 @@ function actualizarTotalCarrito() {
     document.getElementsByClassName('carrito-precio-total')[0].innerText = '$' + total.toLocaleString("es") + ",00";
 
 }
+function guardarCarritoEnLocalStorage(carritoItems) {
+    let carritoItemsJSON = JSON.stringify(carritoItems);
+    localStorage.setItem('carrito', carritoItemsJSON);
+}
 
-
+function cargarCarritoDesdeLocalStorage() {
+    let carritoItemsJSON = localStorage.getItem('carrito');
+    return JSON.parse(carritoItemsJSON) || [];
+}
