@@ -1,27 +1,4 @@
 
-function crearProducto(producto) {
-    return `
-      <div class="item">
-        <span class="titulo-item">${producto.titulo}</span>
-        <img src="${producto.imagen}" alt="" class="img-item">
-        <span class="precio-item">${producto.precio}</span>
-        <button class="boton-item">Agregar al Carrito</button>
-      </div>
-    `;
-}
-
-fetch("./Listadeproductos.json")
-    .then(response => response.json())
-    .then(data => {
-        const productosContainer = document.getElementById('productos-container');
-        data.forEach(producto => {
-            const productoHTML = crearProducto(producto);
-            productosContainer.innerHTML += productoHTML;
-        });
-        ready()
-    })
-    .catch(error => console.error('Error al cargar los productos:', error));
-
 function ready() {
     let botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
     for (let i = 0; i < botonesEliminarItem.length; i++) {
@@ -235,10 +212,28 @@ function restarCantidad(event) {
     }
 }
 
+//function eliminarItemCarrito(event) {
+//    let buttonClicked = event.target;
+//    buttonClicked.parentElement.parentElement.remove();
+//    actualizarTotalCarrito();
+//}
 function eliminarItemCarrito(event) {
     let buttonClicked = event.target;
-    buttonClicked.parentElement.parentElement.remove();
+    let item = buttonClicked.parentElement;
+    let titulo = item.getElementsByClassName('carrito-item-titulo')[0].innerText;
+
+    // Eliminar el elemento visualmente
+    item.remove();
+
+    // Eliminar el elemento del array carritoItemsA
+    carritoItemsA = carritoItemsA.filter(item => item.titulo !== titulo);
+
+    // Guardar el carrito actualizado en el Local Storage
+    guardarCarritoEnLocalStorage(carritoItemsA);
+
+    // Actualizar el total del carrito
     actualizarTotalCarrito();
+    console.log(carritoItemsA)
 }
 
 function actualizarTotalCarrito() {
@@ -268,3 +263,26 @@ function cargarCarritoDesdeLocalStorage() {
     let carritoItemsJSON = localStorage.getItem('carrito');
     return JSON.parse(carritoItemsJSON) || [];
 }
+
+function crearProducto(producto) {
+    return `
+      <div class="item">
+        <span class="titulo-item">${producto.titulo}</span>
+        <img src="${producto.imagen}" alt="" class="img-item">
+        <span class="precio-item">${producto.precio}</span>
+        <button class="boton-item">Agregar al Carrito</button>
+      </div>
+    `;
+}
+
+fetch("./Listadeproductos.json")
+    .then(response => response.json())
+    .then(data => {
+        const productosContainer = document.getElementById('productos-container');
+        data.forEach(producto => {
+            const productoHTML = crearProducto(producto);
+            productosContainer.innerHTML += productoHTML;
+        });
+        ready()
+    })
+    .catch(error => console.error('Error al cargar los productos:', error));
