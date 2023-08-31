@@ -1,0 +1,62 @@
+[
+    {
+        "titulo": "Cubo 3x3 clasico",
+        "imagen": "https://m.media-amazon.com/images/I/81XkUCfu0mL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$5.000"
+    },
+    {
+        "titulo": "Cubo phantom",
+        "imagen": "https://m.media-amazon.com/images/I/81fuFmRT-HL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$8.000"
+    },
+    {
+        "titulo": "Cubo 4x4",
+        "imagen": "https://m.media-amazon.com/images/I/818qogcPhdL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$6.000"
+    },
+    {
+        "titulo": "Cubo imposible",
+        "imagen": "https://m.media-amazon.com/images/I/91Sztk4ao6L._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$8.000"
+    },
+    {
+        "titulo": "Cubo 5x5",
+        "imagen": "https://m.media-amazon.com/images/I/81c3OVHjegL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$6.500"
+    },
+    {
+        "titulo": "Cubo 2x2",
+        "imagen": "https://m.media-amazon.com/images/I/71y2WECZWqL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$4.000"
+    },
+    {
+        "titulo": "Cubo 3x3x1",
+        "imagen": "https://m.media-amazon.com/images/I/6117X4EGzHL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$3.500"
+    },
+    {
+        "titulo": "Cubo 3x3 engranajes",
+        "imagen": "https://m.media-amazon.com/images/I/513ZurgSMWL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$7.000"
+    },
+    {
+        "titulo": "Set de cubos",
+        "imagen": "https://m.media-amazon.com/images/I/61DGzCfUfzL._AC_UL600_FMwebp_QL65_.jpg",
+        "precio": "$10.000"
+    },
+    {
+        "titulo": "Cubo 7x7",
+        "imagen": "https://m.media-amazon.com/images/I/71oAmQ9cgxL._AC_UL400_.jpg",
+        "precio": "$7.000"
+    },
+    {
+        "titulo": "Cubo piramix",
+        "imagen": "https://m.media-amazon.com/images/I/51SUAUb65XL._AC_UL400_.jpg",
+        "precio": "$6.000"
+    },
+    {
+        "titulo": "Cubo 3x3 Qiyi",
+        "imagen": "https://m.media-amazon.com/images/I/51EXBgY8UqL._AC_UL400_.jpg",
+        "precio": "$8.000"
+    }
+]

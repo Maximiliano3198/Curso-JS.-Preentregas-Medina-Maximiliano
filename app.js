@@ -1,8 +1,26 @@
-if (document.readyState == 'loading') {
-    document.addEventListener('DOMContentLoaded', ready);
-} else {
-    ready();
+
+function crearProducto(producto) {
+    return `
+      <div class="item">
+        <span class="titulo-item">${producto.titulo}</span>
+        <img src="${producto.imagen}" alt="" class="img-item">
+        <span class="precio-item">${producto.precio}</span>
+        <button class="boton-item">Agregar al Carrito</button>
+      </div>
+    `;
 }
+
+fetch("./Listadeproductos.json")
+    .then(response => response.json())
+    .then(data => {
+        const productosContainer = document.getElementById('productos-container');
+        data.forEach(producto => {
+            const productoHTML = crearProducto(producto);
+            productosContainer.innerHTML += productoHTML;
+        });
+        ready()
+    })
+    .catch(error => console.error('Error al cargar los productos:', error));
 
 function ready() {
     let botonesEliminarItem = document.getElementsByClassName('btn-eliminar');
@@ -75,7 +93,13 @@ function ready() {
 
 
 function pagarClicked() {
-    alert("Gracias por la compra");
+    Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'El pago fue procesado.',
+        showConfirmButton: false,
+        timer: 1500
+    })
     let carritoItems = document.getElementsByClassName('carrito-items')[0];
     while (carritoItems.hasChildNodes()) {
         carritoItems.removeChild(carritoItems.firstChild);
@@ -116,6 +140,20 @@ let carritoItemsA = [];
 
 
 function agregarItemAlCarrito(titulo, precio, imagenSrc) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    })
+    Toast.fire({
+        icon: 'success',
+        title: 'Añadido al carrito'
+    })
     let item = document.createElement('div');
     item.classList.add('carrito-item');
 
@@ -124,7 +162,11 @@ function agregarItemAlCarrito(titulo, precio, imagenSrc) {
     let nombresItemsCarrito = itemsCarrito.getElementsByClassName('carrito-item-titulo');
     for (let i = 0; i < nombresItemsCarrito.length; i++) {
         if (nombresItemsCarrito[i].innerText == titulo) {
-            alert("El item ya se encuentra en el carrito");
+            Toast.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El producto ya se encuentra en el carrito',
+            })
             return;
         }
     }
